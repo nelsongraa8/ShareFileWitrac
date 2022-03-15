@@ -16,11 +16,11 @@ class File
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private $description;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $FileName;
+    private $filename;
 
     public function getId(): ?int
     {
@@ -51,14 +51,14 @@ class File
         return $this;
     }
 
-    public function getFileName(): ?string
+    public function getfilename(): ?string
     {
-        return $this->FileName;
+        return $this->filename;
     }
 
-    public function setFileName(string $FileName): self
+    public function setfilename(string $filename): self
     {
-        $this->FileName = $FileName;
+        $this->filename = $filename;
 
         return $this;
     }

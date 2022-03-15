@@ -6,15 +6,25 @@ use App\Entity\File;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class FormFileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('FileName')
+            ->add('name', TextType::class, [
+                'label' => 'Nombre del Archivo'
+            ])
+            ->add('description', TextType::class, [
+                'label' => 'Descripcion del Archivo'
+            ])
+            ->add('FileName', TextType::class, [
+                'label' => 'Archivo'
+            ])
+            ->add('Submit', SubmitType::class)
         ;
     }
 
