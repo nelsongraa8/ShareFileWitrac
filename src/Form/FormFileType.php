@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\File;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\File as FileValidator;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,8 +22,13 @@ class FormFileType extends AbstractType
             ->add('description', TextType::class, [
                 'label' => 'Descripcion del Archivo'
             ])
-            ->add('FileName', TextType::class, [
-                'label' => 'Archivo'
+            ->add('file', FileType::class, [
+                'label' => 'Archivo',
+                'required' => true,
+                'mapped' => false,
+                'constraints' => [
+                    new FileValidator(['maxSize' => '10240'])
+                ]
             ])
             ->add('Submit', SubmitType::class)
         ;
