@@ -45,7 +45,6 @@ class FormFileController extends AbstractController
         }
 
         return $this->render('form_file/index.html.twig', [
-            'controller_name' => 'FormFileController',
             'formFile' => $formFile->createView(),
         ]);
     }
