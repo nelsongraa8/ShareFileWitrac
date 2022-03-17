@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use App\Entity\User;
 
 class FormFileController extends AbstractController
 {
@@ -38,6 +39,9 @@ class FormFileController extends AbstractController
                 $file->setfilename($fileFormName);
             }
 
+            $user = $this->getUser();
+            $file->setUserId($user);
+
             $entityManager->persist($file);
             $entityManager->flush();
 
@@ -45,7 +49,7 @@ class FormFileController extends AbstractController
         }
 
         return $this->render('form_file/index.html.twig', [
-            'formFile' => $formFile->createView(),
+            'formFile' => $formFile->createView()
         ]);
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\FileRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: FileRepository::class)]
 class File
@@ -21,6 +23,9 @@ class File
 
     #[ORM\Column(type: 'string', length: 255)]
     private $filename;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "files")]
+    private $userId;
 
     public function getId(): ?int
     {
@@ -59,6 +64,18 @@ class File
     public function setfilename(string $filename): self
     {
         $this->filename = $filename;
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(?User $userId): self
+    {
+        $this->userId = $userId;
 
         return $this;
     }
