@@ -36,7 +36,7 @@ class CreateUserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_create_user');
+            return $this->redirectToRoute('app_list_file');
         }
 
         return $this->render('create_user/index.html.twig', [

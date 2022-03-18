@@ -45,7 +45,7 @@ class FormFileController extends AbstractController
             $entityManager->persist($file);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_form_file');
+            return $this->redirectToRoute('app_list_file');
         }
 
         return $this->render('form_file/index.html.twig', [

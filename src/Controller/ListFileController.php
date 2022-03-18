@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ListFileController extends AbstractController
 {
-    #[Route('/listfile', name: 'app_list_file')]
+    #[Route('/', name: 'app_list_file')]
     public function index(ManagerRegistry $doctrine): Response
     {
         $files = $doctrine->getRepository(File::class)->findAll();
