@@ -9,13 +9,21 @@
     {% for file in files %}
         <p>
         <div>
-            {{ file.name }}
+            <b>Nombre:</b> {{ file.name }}
+
             <br>
-            {{ file.description }}
+
+            <b>Descriccion:</b> {{ file.description }}
+
             <br>
-            <a href='./uploads/file/{{ file.filename }}'>
+
+            <b>Archivo:</b> <a href='./uploads/file/{{ file.filename }}'>
                 {{ file.filename }}
             </a>
+
+            <br>
+
+            {# <b>User:</b> {{ file.userId }} #}
         </div>
     {% endfor %}
 

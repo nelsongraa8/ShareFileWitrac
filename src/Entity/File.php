@@ -24,8 +24,19 @@ class File
     #[ORM\Column(type: 'string', length: 255)]
     private $filename;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "files")]
-    private $userId;
+    // #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "files")]
+    // private $userId;
+
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'fileBlock')]
+    private $userBlock;
+
+    #[ORM\OneToOne(targetEntity: User::class, cascade: ['persist', 'remove'])]
+    private $user;
+
+    public function __construct()
+    {
+        $this->userBlock = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -76,6 +87,42 @@ class File
     public function setUserId(?User $userId): self
     {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUserBlock(): Collection
+    {
+        return $this->userBlock;
+    }
+
+    public function addUserBlock(User $userBlock): self
+    {
+        if (!$this->userBlock->contains($userBlock)) {
+            $this->userBlock[] = $userBlock;
+        }
+
+        return $this;
+    }
+
+    public function removeUserBlock(User $userBlock): self
+    {
+        $this->userBlock->removeElement($userBlock);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

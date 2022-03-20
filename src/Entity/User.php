@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Entity\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -27,6 +29,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(targetEntity: File::class, mappedBy: "userId")]
     private $files;
+
+    #[ORM\ManyToMany(targetEntity: File::class, mappedBy: 'userBlock')]
+    private $fileBlock;
+
+    public function __construct()
+    {
+        $this->fileBlock = new ArrayCollection();
+    }
 
     public function getFiles(): ?File
     {
@@ -108,5 +118,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, File>
+     */
+    public function getFileBlock(): Collection
+    {
+        return $this->fileBlock;
+    }
+
+    public function addFileBlock(File $fileBlock): self
+    {
+        if (!$this->fileBlock->contains($fileBlock)) {
+            $this->fileBlock[] = $fileBlock;
+            $fileBlock->addUserBlock($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFileBlock(File $fileBlock): self
+    {
+        if ($this->fileBlock->removeElement($fileBlock)) {
+            $fileBlock->removeUserBlock($this);
+        }
+
+        return $this;
     }
 }
