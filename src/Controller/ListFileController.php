@@ -15,6 +15,10 @@ class ListFileController extends AbstractController
     {
         $files = $doctrine->getRepository(File::class)->findAll();
 
+        $emailUser = $files[6]->getUser()->getEmail();
+
+        dump($emailUser);
+
         return $this->render('list_file/index.html.twig', [
             'files' => $files,
         ]);

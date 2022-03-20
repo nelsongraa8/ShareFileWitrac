@@ -26,6 +26,7 @@ class FormFileController extends AbstractController
 
         /** Procesar el formulario */
         $formFile->handleRequest($request);
+
         if ($formFile->isSubmitted() && $formFile->isValid()) {
             if ($fileForm = $formFile['file']->getData()) {
                 $fileFormName = bin2hex(random_bytes(6)) . '.' . $fileForm->guessExtension();
@@ -40,7 +41,7 @@ class FormFileController extends AbstractController
             }
 
             $user = $this->getUser();
-            $file->setUserId($user);
+            $file->setUser($user);
 
             $entityManager->persist($file);
             $entityManager->flush();
