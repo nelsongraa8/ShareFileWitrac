@@ -1,10 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ListFileController!{% endblock %}
+{% block title %}Hello MyListFileControlerController!{% endblock %}
 
 {% block body %}
-
-    <h1>Archivos</h1>
+    <h1>Mis Archivos</h1>
 
     {% for file in files %}
         <p>
@@ -23,11 +22,6 @@
             </a>
 
             <br>
-
-            <b>User:</b>
-            {% if file.user != '' %}
-                {{ file.user.email }}
-            {% endif %}
         </div>
     {% endfor %}
 

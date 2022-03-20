@@ -2,21 +2,21 @@
 
 namespace App\Controller;
 
-use App\Entity\File;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\File;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ListFileController extends AbstractController
+class MyListFileController extends AbstractController
 {
-    #[Route('/', name: 'app_list_file')]
+    #[Route('/mylistfile', name: 'app_my_list_file_controler')]
     public function index(ManagerRegistry $doctrine): Response
     {
         $files = $doctrine->getRepository(File::class)
-            ->findAll();
+            ->findby(['user' => $this->getUser()]);
 
-        return $this->render('list_file/index.html.twig', [
+        return $this->render('my_list_file/index.html.twig', [
             'files' => $files,
         ]);
     }

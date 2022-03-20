@@ -15,6 +15,15 @@ class LoginFormTest extends WebTestCase
         $this->assertSelectorTextContains('h1', 'Archivos');
     }
 
+    public function testMyListFile(): void
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/mylistfile');
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('h1', 'Mis Archivos');
+    }
+
     public function testLogout(): void
     {
         $client = static::createClient();
