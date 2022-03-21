@@ -83,7 +83,7 @@ class LoginFormTest extends WebTestCase
         $client->submitForm('Submit', [
             'form_file[name]' => 'title test ' . rand(99999, 99999999999),
             'form_file[description]' => 'description test ' . rand(99999, 99999999999),
-            'form_file[file]' => dirname(__DIR__).'/public/images/foto.jpg'
+            'form_file[file]' => dirname(__DIR__) . '/public/images/foto.jpg'
         ]);
 
         $this->assertResponseRedirects();

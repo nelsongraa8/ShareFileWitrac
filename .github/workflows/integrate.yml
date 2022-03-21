@@ -1,0 +1,25 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  quality:
+    name: Quality checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: PHP Code Sniffer
+        if: ${{ always() }}
+        run: ./vendor/bin/phpcs --standard=PSR12 -p src/Controller/Movies src/Controller/Utils
+
+      - name: PHP Unit tests
+        if: ${{ always() }}
+        run: ./vendor/bin/phpunit tests
