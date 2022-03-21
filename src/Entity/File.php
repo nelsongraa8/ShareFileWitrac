@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FileRepository;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: FileRepository::class)]
 class File
@@ -24,19 +22,8 @@ class File
     #[ORM\Column(type: 'string', length: 255)]
     private $filename;
 
-    // #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "files")]
-    // private $userId;
-
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'fileBlock')]
-    private $userBlock;
-
     #[ORM\OneToOne(targetEntity: User::class, cascade: ['persist', 'remove'])]
     private $user;
-
-    public function __construct()
-    {
-        $this->userBlock = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -75,42 +62,6 @@ class File
     public function setfilename(string $filename): self
     {
         $this->filename = $filename;
-
-        return $this;
-    }
-
-    public function getUserId(): ?User
-    {
-        return $this->userId;
-    }
-
-    public function setUserId(?User $userId): self
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUserBlock(): Collection
-    {
-        return $this->userBlock;
-    }
-
-    public function addUserBlock(User $userBlock): self
-    {
-        if (!$this->userBlock->contains($userBlock)) {
-            $this->userBlock[] = $userBlock;
-        }
-
-        return $this;
-    }
-
-    public function removeUserBlock(User $userBlock): self
-    {
-        $this->userBlock->removeElement($userBlock);
 
         return $this;
     }
