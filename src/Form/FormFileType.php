@@ -28,7 +28,7 @@ class FormFileType extends AbstractType
                 'required' => true,
                 'mapped' => false,
                 'constraints' => [
-                    new FileValidator(['maxSize' => '10485760'])
+                    new FileValidator(['maxSize' => '1000000000'])
                 ]
             ])
             ->add('Submit', SubmitType::class)
