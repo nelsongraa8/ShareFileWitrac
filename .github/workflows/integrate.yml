@@ -20,6 +20,6 @@ jobs:
         if: ${{ always() }}
         run: ./vendor/bin/phpcs --standard=PSR2 -p src/Controller
 
-      # - name: PHP Unit tests
-      #   if: ${{ always() }}
-      #   run: ./vendor/bin/phpunit tests
+      - name: PHP Unit tests
+        if: ${{ always() }}
+        run: ./vendor/bin/phpunit tests
