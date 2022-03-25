@@ -11,9 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ListFileController extends AbstractController
 {
     #[Route('/', name: 'app_list_file')]
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(ManagerRegistry $managerRegistry): Response
     {
-        $files = $doctrine->getRepository(File::class)
+        $files = $managerRegistry->getRepository(File::class)
             ->findAll();
 
         return $this->render('list_file/index.html.twig', [

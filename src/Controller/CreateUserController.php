@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\CreateUserType;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,24 +16,23 @@ class CreateUserController extends AbstractController
 {
     protected $request;
     private $formUser;
-    public $userEntity;
+    // public $userEntity;
 
     public function __construct(
         private EntityManagerInterface $entityManager,
         private ?UserPasswordHasherInterface $passwordHasher,
+        // public Request $request,
     ) {
-        $this->userEntity = new User();
     }
 
     #[Route('/createuser', name: 'app_create_user')]
-    public function index(
-        Request $request,
-    ): Response {
+    public function index(Request $request): Response
+    {
         $this->request = $request;
 
         $user = new User();
 
-        $this->methodFormView();
+        $this->methodFormView($user);
 
         if ($this->methodFormSubbmited($user)) {
             return $this->redirectToRoute('app_list_file');
@@ -51,12 +51,12 @@ class CreateUserController extends AbstractController
      * @param User $user
      * @return void
      */
-    private function methodFormView()
+    private function methodFormView($user)
     {
         $this->formUser = $this
             ->createForm(
                 CreateUserType::class,
-                $this->userEntity
+                $user
             );
     }
 
@@ -65,7 +65,7 @@ class CreateUserController extends AbstractController
      * que se carga desde este mismo controladro en la vista
      *
      * @param User $user
-     * @return void
+     * @return boolean
      */
     private function methodFormSubbmited($user)
     {
