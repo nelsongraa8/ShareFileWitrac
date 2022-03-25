@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\File;
 
 use App\Entity\File;
 use App\Form\FormFileType;

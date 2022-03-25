@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\User;
 
 use App\Entity\User;
 use App\Form\CreateUserType;
@@ -16,12 +16,10 @@ class CreateUserController extends AbstractController
 {
     protected $request;
     private $formUser;
-    // public $userEntity;
 
     public function __construct(
         private EntityManagerInterface $entityManager,
         private ?UserPasswordHasherInterface $passwordHasher,
-        // public Request $request,
     ) {
     }
 

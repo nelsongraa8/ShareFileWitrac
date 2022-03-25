@@ -20,17 +20,12 @@
         "enabled": true,
         "actions": [
             {
-                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting",
-                "options": [],
-                "conditions": []
-            },
-            {
                 "action": "symfony php bin/phpunit",
                 "options": [],
                 "conditions": []
             },
             {
-                "action": "phpcs --standard=psr2 src/Controller src/Form tests/Functional",
+                "action": "phpcs --standard=psr2 -p src/Controller src/Form tests/Functional",
                 "options": [],
                 "conditions": []
             }

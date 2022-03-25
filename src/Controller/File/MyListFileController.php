@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\File;
 
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\File;
@@ -11,10 +11,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MyListFileController extends AbstractController
 {
     #[Route('/mylistfile', name: 'app_my_list_file_controler')]
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(ManagerRegistry $managerRegistry): Response
     {
-        $files = $doctrine->getRepository(File::class)
-            ->findby(['user' => $this->getUser()]);
+        $files = $managerRegistry->getRepository(File::class)
+            ->findby(
+                [
+                    'user' => $this->getUser()
+                ]
+            );
 
         return $this->render('my_list_file/index.html.twig', [
             'files' => $files,
