@@ -18,7 +18,7 @@ jobs:
 
       - name: PHP Code Sniffer
         if: ${{ always() }}
-        run: ./vendor/bin/phpcs --standard=PSR2 -p src/Controller
+        run: ./vendor/bin/phpcs --standard=PSR2 -p src/Controller src/Form tests/Functional
 
       - name: PHP Unit tests
         if: ${{ always() }}

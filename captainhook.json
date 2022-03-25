@@ -30,7 +30,7 @@
                 "conditions": []
             },
             {
-                "action": "phpcs --standard=psr2 src/Controller src/Form",
+                "action": "phpcs --standard=psr2 src/Controller src/Form tests/Functional",
                 "options": [],
                 "conditions": []
             }
